@@ -1,0 +1,165 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Create dummy google-services.json
+        run: |
+          mkdir -p app
+          cat > app/google-services.json << 'EOF'
+          {
+            "project_info": {
+              "project_number": "000000000000",
+              "project_id": "nph-app-template",
+              "storage_bucket": "nph-app-template.appspot.com"
+            },
+            "client": [
+              {
+                "client_info": {
+                  "mobilesdk_app_id": "1:000000000000:android:0000000000000000",
+                  "android_client_info": {
+                    "package_name": "com.nphstudio.appname"
+                  }
+                },
+                "api_key": [
+                  {
+                    "current_key": "AIzaSyDummyKeyForCI_000000000000000"
+                  }
+                ],
+                "services": {}
+              }
+            ],
+            "configuration_version": "1"
+          }
+          EOF
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      # ══════════════════════════════════════════════════
+      # CHECK 1: Build compiles successfully
+      # ══════════════════════════════════════════════════
+      - name: "CHECK 1: Build Debug APK"
+        run: ./gradlew assembleDebug --no-daemon
+
+      # ══════════════════════════════════════════════════
+      # CHECK 2: No direct AdMob SDK imports in source
+      # ══════════════════════════════════════════════════
+      - name: "CHECK 2: No direct AdMob imports"
+        run: |
+          echo "Scanning for direct AdMob SDK imports in source code..."
+          if grep -rn "import com\.google\.android\.gms\.ads" app/src/ --include="*.kt" --include="*.java"; then
+            echo "::error::Direct AdMob SDK imports found! Use NphAds API instead."
+            exit 1
+          fi
+          echo "✅ No direct AdMob imports found."
+
+      # ══════════════════════════════════════════════════
+      # CHECK 3: No hardcoded ad unit IDs in source
+      # ══════════════════════════════════════════════════
+      - name: "CHECK 3: No hardcoded ad unit IDs"
+        run: |
+          echo "Scanning for hardcoded ad unit IDs..."
+          if grep -rn "ca-app-pub-" app/src/ --include="*.kt" --include="*.java"; then
+            echo "::error::Hardcoded ad unit IDs found in source code! Ad IDs must only be in ads_config.json."
+            exit 1
+          fi
+          echo "✅ No hardcoded ad unit IDs found."
+
+      # ══════════════════════════════════════════════════
+      # CHECK 4: local.properties not committed
+      # ══════════════════════════════════════════════════
+      - name: "CHECK 4: No local.properties in repo"
+        run: |
+          if [ -f "local.properties" ]; then
+            echo "::error::local.properties found in repo! This file must be in .gitignore."
+            exit 1
+          fi
+          echo "✅ local.properties not in repo."
+
+      # ══════════════════════════════════════════════════
+      # CHECK 5: No keystore files committed
+      # ══════════════════════════════════════════════════
+      - name: "CHECK 5: No keystore files"
+        run: |
+          if find . -name "*.jks" -o -name "*.keystore" | grep -q .; then
+            echo "::error::Keystore files found in repo!"
+            exit 1
+          fi
+          echo "✅ No keystore files found."
+
+      # ══════════════════════════════════════════════════
+      # CHECK 6: No google-services.json committed (except CI dummy)
+      # ══════════════════════════════════════════════════
+      - name: "CHECK 6: google-services.json not tracked by git"
+        run: |
+          if git ls-files --cached | grep -q "google-services.json"; then
+            echo "::error::google-services.json is tracked by git! It should be in .gitignore."
+            exit 1
+          fi
+          echo "✅ google-services.json not tracked."
+
+      # ══════════════════════════════════════════════════
+      # CHECK 7: AAR files exist in libs/
+      # ══════════════════════════════════════════════════
+      - name: "CHECK 7: SDK AARs present"
+        run: |
+          AAR_COUNT=$(find app/libs -name "*.aar" 2>/dev/null | wc -l)
+          if [ "$AAR_COUNT" -lt 3 ]; then
+            echo "::error::Expected 3 AAR files in app/libs/, found $AAR_COUNT"
+            exit 1
+          fi
+          echo "✅ Found $AAR_COUNT AAR files in app/libs/."
+
+      # ══════════════════════════════════════════════════
+      # CHECK 8: Required docs exist
+      # ══════════════════════════════════════════════════
+      - name: "CHECK 8: Required documentation"
+        run: |
+          MISSING=0
+          for f in README.md docs/product.md docs/MO.md; do
+            if [ ! -f "$f" ]; then
+              echo "::warning::Missing required doc: $f"
+              MISSING=$((MISSING + 1))
+            fi
+          done
+          if [ "$MISSING" -gt 0 ]; then
+            echo "::warning::$MISSING required docs missing. Please add them."
+          else
+            echo "✅ All required docs present."
+          fi
+
+      # ══════════════════════════════════════════════════
+      # CHECK 9: Android Lint
+      # ══════════════════════════════════════════════════
+      - name: "CHECK 9: Android Lint"
+        run: ./gradlew lint --no-daemon
+        continue-on-error: true
+
+      - name: Upload lint results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lint-results
+          path: app/build/reports/lint-results-debug.html
+          retention-days: 7

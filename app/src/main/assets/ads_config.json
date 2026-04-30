@@ -1,0 +1,114 @@
+{
+  "_doc": "NPH SDK ads_config.json — Template v1.0.1",
+  "_bannerTypes": "banner_adaptive | banner | banner_large | banner_medium | banner_full | banner_leaderboard | collapsible_top | collapsible_bottom | banner_collapse_top | banner_collapse_bottom | banner_adaptive_top | banner_adaptive_bottom | banner_top | banner_bottom",
+  "_nativeTypes": "native_small | native_medium | native_full",
+
+  "isEnableAll": true,
+
+  "splashAds": {
+    "nameSpace": "nsp-appopen-splash-fullscreen-auto",
+    "isEnable": true,
+    "isUseOpen": true,
+    "timeOut": 15000,
+    "unitIds": [
+      { "unitId": "ca-app-pub-3940256099942544/9257395921", "isEnable": true, "network": "admob" }
+    ],
+    "unitIdsInter": [
+      { "unitId": "ca-app-pub-3940256099942544/1033173712", "isEnable": true, "network": "admob" }
+    ]
+  },
+
+  "resumeAds": {
+    "nameSpace": "nsp-appopen-resume-fullscreen-auto",
+    "isEnable": true,
+    "unitIds": [
+      { "unitId": "ca-app-pub-3940256099942544/9257395921", "isEnable": true, "network": "admob" }
+    ]
+  },
+
+  "interstitialAds": [
+    {
+      "nameSpace": "nsp-interstitial-language-fullscreen-complete",
+      "type": "interstitial",
+      "isEnable": true,
+      "isShowLoading": true,
+      "interval": 25,
+      "stepCount": 1,
+      "forceShow": false,
+      "unitIds": [
+        { "unitId": "ca-app-pub-3940256099942544/1033173712", "isEnable": true, "network": "admob" }
+      ]
+    },
+    {
+      "nameSpace": "nsp-interstitial-onboarding-fullscreen-complete",
+      "type": "interstitial",
+      "isEnable": true,
+      "isShowLoading": true,
+      "forceShow": true,
+      "unitIds": [
+        { "unitId": "ca-app-pub-3940256099942544/1033173712", "isEnable": true, "network": "admob" }
+      ]
+    },
+    {
+      "nameSpace": "nsp-interstitial-home-fullscreen-clickSettings",
+      "type": "interstitial",
+      "isEnable": true,
+      "isShowLoading": true,
+      "interval": 25,
+      "stepCount": 2,
+      "forceShow": false,
+      "unitIds": [
+        { "unitId": "ca-app-pub-3940256099942544/1033173712", "isEnable": true, "network": "admob" }
+      ]
+    }
+  ],
+
+  "rewardedAds": [],
+  "rewardedInterAds": [],
+
+  "bannerAds": [
+    {
+      "nameSpace": "nsp-banner-onboarding-bottom-auto",
+      "type": "banner_adaptive",
+      "isEnable": true,
+      "bannerType": "banner_adaptive",
+      "forceReload": true,
+      "unitIds": [
+        { "unitId": "ca-app-pub-3940256099942544/9214589741", "isEnable": true, "network": "admob" }
+      ]
+    },
+    {
+      "nameSpace": "nsp-banner-home-bottom-auto",
+      "type": "collapsible_bottom",
+      "isEnable": true,
+      "bannerType": "collapsible_bottom",
+      "forceReload": true,
+      "unitIds": [
+        { "unitId": "ca-app-pub-3940256099942544/9214589741", "isEnable": true, "network": "admob" }
+      ]
+    },
+    {
+      "nameSpace": "nsp-banner-settings-bottom-auto",
+      "type": "banner_adaptive",
+      "isEnable": true,
+      "bannerType": "banner_adaptive",
+      "forceReload": true,
+      "unitIds": [
+        { "unitId": "ca-app-pub-3940256099942544/9214589741", "isEnable": true, "network": "admob" }
+      ]
+    }
+  ],
+
+  "nativeAds": [
+    {
+      "nameSpace": "nsp-native-home-top-auto",
+      "type": "native_medium",
+      "isEnable": true,
+      "nativeType": "native_medium",
+      "forceReload": true,
+      "unitIds": [
+        { "unitId": "ca-app-pub-3940256099942544/2247696110", "isEnable": true, "network": "admob" }
+      ]
+    }
+  ]
+}
