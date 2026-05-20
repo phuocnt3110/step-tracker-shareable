@@ -76,11 +76,9 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     // ══════════════════════════════════════════════════
-    // NPH SDK
+    // NPH SDK v1.0.5 — DO NOT MODIFY
     // ══════════════════════════════════════════════════
-    implementation(files("libs/nph-ads-1.0.5-release.aar"))
-    implementation(files("libs/nph-config-1.0.5-release.aar"))
-    implementation(files("libs/nph-track-1.0.5-release.aar"))
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar"))))
 
     // Google Mobile Ads
     implementation("com.google.android.gms:play-services-ads:24.0.0")
