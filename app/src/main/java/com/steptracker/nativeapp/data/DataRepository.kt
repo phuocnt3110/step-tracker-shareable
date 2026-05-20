@@ -46,12 +46,20 @@ class DataRepository(context: Context) {
         return dailyDataDao.getRange(monthAgo, today)
     }
 
+    private var lastCheckedSteps = 0
+    
     suspend fun updateSteps(date: LocalDate, steps: Int) = withContext(Dispatchers.IO) {
         val data = dailyDataDao.getByDate(date)
         if (data != null) {
             dailyDataDao.update(data.copy(currentSteps = steps))
         } else {
             dailyDataDao.insert(DailyData(date = date, currentSteps = steps))
+        }
+        
+        // Check achievements every 500 steps to avoid excessive DB queries
+        if (steps - lastCheckedSteps >= 500) {
+            lastCheckedSteps = steps
+            checkAchievements()
         }
     }
 

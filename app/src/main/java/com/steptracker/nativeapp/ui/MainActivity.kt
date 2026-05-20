@@ -75,6 +75,9 @@ class MainActivity : AppCompatActivity() {
         
         setupBottomNavigation()
         
+        // Schedule daily midnight reset
+        com.steptracker.nativeapp.sensor.DailyResetReceiver.scheduleDailyReset(this)
+        
         // Preload ads for sub-screens
         NphAds.preload(this, AdNamespaces.INTER_MAIN)
         NphAds.preload(this, AdNamespaces.INTER_SETTINGS)
@@ -223,21 +226,23 @@ class MainActivity : AppCompatActivity() {
     
     private fun initializeApp() {
         lifecycleScope.launch {
+            // Initialize achievements on first run
+            repository.initializeAchievements()
+            
+            // Ensure today's data exists and restore step count from DB
+            val todayData = repository.getOrCreateTodayData()
+            stepCounterManager.restoreFromDb(todayData.currentSteps)
+            
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // Initialize achievements on first run
-                repository.initializeAchievements()
-                
-                // Ensure today's data exists
-                repository.getOrCreateTodayData()
-                
                 // Check and start step counter
                 if (stepCounterManager.isAvailable.value) {
                     stepCounterManager.startTracking()
-                    Toast.makeText(this@MainActivity, "Step sensor connected!", Toast.LENGTH_SHORT).show()
                     
-                    // Collect steps and save to database
+                    // Only write to DB when we have real sensor data (not the initial 0)
                     stepCounterManager.currentSteps.collect { steps ->
-                        repository.updateSteps(java.time.LocalDate.now(), steps)
+                        if (stepCounterManager.hasSensorData.value || steps > 0) {
+                            repository.updateSteps(java.time.LocalDate.now(), steps)
+                        }
                     }
                 } else {
                     Toast.makeText(
@@ -252,12 +257,23 @@ class MainActivity : AppCompatActivity() {
     
     fun getTrackingService(): ActivityTrackingService? = trackingService
     
+    override fun onStop() {
+        super.onStop()
+        // Persist steps to DB when app goes to background
+        val steps = stepCounterManager.currentSteps.value
+        if (steps > 0) {
+            lifecycleScope.launch {
+                repository.updateSteps(java.time.LocalDate.now(), steps)
+            }
+        }
+    }
+    
     override fun onDestroy() {
-        NphAds.destroy(this)
         super.onDestroy()
+        stepCounterManager.stopTracking()
+        NphAds.destroy(this)
         if (serviceBound) {
             unbindService(serviceConnection)
         }
-        stepCounterManager.stopTracking()
     }
 }
