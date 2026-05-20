@@ -174,15 +174,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showInterstitialAndThen(nameSpace: String, onComplete: () -> Unit) {
+        // Prevent resume ad from firing right after interstitial dismisses
+        NphAds.pauseResumeAds()
+        var completed = false
+        val safeComplete = {
+            if (!completed) {
+                completed = true
+                // Re-enable resume ads after a brief delay (avoid immediate trigger)
+                bottomNav.postDelayed({ NphAds.resumeResumeAds() }, 2000)
+                onComplete()
+            }
+        }
         NphAds.showInterstitial(
             activity = this,
             nameSpace = nameSpace,
             listener = object : NphAdListener() {
                 override fun onAdDismissed() {
-                    onComplete()
+                    safeComplete()
                 }
                 override fun onAdFailed(error: AdError) {
-                    onComplete()
+                    safeComplete()
                 }
             }
         )

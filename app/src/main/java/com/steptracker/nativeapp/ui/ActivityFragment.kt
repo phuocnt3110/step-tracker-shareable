@@ -126,10 +126,15 @@ class ActivityFragment : Fragment() {
 
             // Show interstitial after stopping activity (natural completion)
             activity?.let { act ->
+                NphAds.pauseResumeAds()
                 NphAds.showInterstitial(act, AdNamespaces.INTER_ACTIVITY_COMPLETE,
                     object : NphAdListener() {
-                        override fun onAdDismissed() {}
-                        override fun onAdFailed(error: AdError) {}
+                        override fun onAdDismissed() {
+                            view?.postDelayed({ NphAds.resumeResumeAds() }, 2000)
+                        }
+                        override fun onAdFailed(error: AdError) {
+                            NphAds.resumeResumeAds()
+                        }
                     })
             }
         } else {
