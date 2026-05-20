@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:gravity="center_vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/emerald_50">
+
+        <ImageView
+            android:id="@+id/ivActivityIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_footprints"
+            app:tint="@color/emerald_500" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvActivityType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Walking"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvActivityDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Today, 8:00 AM"
+            android:textSize="12sp"
+            android:textColor="@color/gray_400" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/tvActivitySteps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1,234 steps"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/emerald_500" />
+
+        <TextView
+            android:id="@+id/tvActivityCalories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="45 kcal • 0.8 km"
+            android:textSize="12sp"
+            android:textColor="@color/gray_400" />
+    </LinearLayout>
+</LinearLayout>

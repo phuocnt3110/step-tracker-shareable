@@ -2,33 +2,99 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Permissions for Step Counter and Location -->
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- Hardware features -->
+    <uses-feature android:name="android.hardware.sensor.stepcounter" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
+    <uses-feature android:name="android.hardware.location" android:required="false" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
 
     <application
-        android:name=".MyApp"
+        android:name=".StepTrackerApplication"
         android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NphApp"
-        tools:targetApi="35">
+        android:theme="@style/Theme.StepTracker"
+        tools:targetApi="31">
 
-        <!-- AdMob App ID — value injected from build.gradle.kts -->
+        <!-- NPH AdMob App ID (test ID) -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="${admobAppId}" />
+            android:value="ca-app-pub-3940256099942544~3347511713" />
 
+        <!-- Splash Activity with App Open Ad -->
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.NphApp">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.StepTracker">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.language.LanguageActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.ActivityDetailActivity"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.ActivityListActivity"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- Foreground Service for Activity Tracking -->
+        <service
+            android:name=".sensor.ActivityTrackingService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+
+        <!-- Boot Receiver to restart tracking after reboot -->
+        <receiver
+            android:name=".sensor.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Daily Steps Reset Receiver -->
+        <receiver
+            android:name=".sensor.DailyResetReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
     </application>
+
 </manifest>

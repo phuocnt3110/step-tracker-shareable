@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_steps"
+        android:icon="@drawable/ic_footprints"
+        android:title="@string/tab_steps" />
+    <item
+        android:id="@+id/nav_activity"
+        android:icon="@drawable/ic_map"
+        android:title="@string/tab_activity" />
+    <item
+        android:id="@+id/nav_report"
+        android:icon="@drawable/ic_chart"
+        android:title="@string/tab_report" />
+    <item
+        android:id="@+id/nav_achievement"
+        android:icon="@drawable/ic_trophy"
+        android:title="@string/tab_achievement" />
+</menu>

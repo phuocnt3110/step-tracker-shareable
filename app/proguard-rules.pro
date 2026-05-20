@@ -1,20 +1,23 @@
-# NPH SDK — Keep public API
--keep class com.nphlab.sdk.ads.NphSdk { *; }
--keep class com.nphlab.sdk.ads.NphAds { *; }
--keep class com.nphlab.sdk.ads.AdError { *; }
--keep class com.nphlab.sdk.ads.AdError$* { *; }
--keep class com.nphlab.sdk.ads.listener.** { *; }
--keep class com.nphlab.sdk.config.ConfigSource { *; }
+# Add project specific ProGuard rules here.
+# You can control the set of applied configuration files using the
+# proguardFiles setting in build.gradle.
 
-# Google Ads
+# NPH SDK - Keep all classes
+-keep class com.nphlab.sdk.** { *; }
+-keep class com.nphlab.sdk.ads.** { *; }
+-keep class com.nphlab.sdk.config.** { *; }
 -keep class com.google.android.gms.ads.** { *; }
 
-# Firebase
--keep class com.google.firebase.** { *; }
+# Keep AdMob classes
+-keep class com.google.android.gms.ads.AdRequest { *; }
+-keep class com.google.android.gms.ads.LoadAdError { *; }
+-keep class com.google.android.gms.ads.FullScreenContentCallback { *; }
+-keep class com.google.android.gms.ads.OnUserEarnedRewardListener { *; }
 
-# Gson
--keepattributes Signature
--keepattributes *Annotation*
--keep class com.google.gson.** { *; }
+# Uncomment this to preserve the line number information for
+# debugging stack traces.
+-keepattributes SourceFile,LineNumberTable
 
-# App-specific rules — add below
+# If you keep the line number information, uncomment this to
+# hide the original source file name.
+#-renamesourcefileattribute SourceFile

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Μετρητής Βημάτων</string>
+    <string name="tab_steps">Βήματα</string>
+    <string name="tab_activity">Δραστηριότητα</string>
+    <string name="tab_report">Αναφορά</string>
+    <string name="tab_achievement">Επίτευγμα</string>
+    <string name="settings">Ρυθμίσεις</string>
+    <string name="language">Γλώσσα</string>
+    <string name="select_language">Επιλέξτε γλώσσα</string>
+    <string name="daily_goal">Ημερήσιος στόχος</string>
+    <string name="steps">βήματα</string>
+    <string name="time">Χρόνος</string>
+    <string name="kcal">Kcal</string>
+    <string name="km">Km</string>
+    <string name="recent_activities">Πρόσφατες δραστηριότητες</string>
+    <string name="save_settings">Αποθήκευση</string>
+    <string name="settings_saved">Οι ρυθμίσεις αποθηκεύτηκαν</string>
+    <string name="share">Κοινοποίηση</string>
+    <string name="rate_us">Αξιολόγηση</string>
+    <string name="about">Σχετικά</string>
+    <string name="privacy_policy">Πολιτική Απορρήτου</string>
+</resources>

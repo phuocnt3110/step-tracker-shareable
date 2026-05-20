@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Đếm Bước</string>
+    
+    <!-- Tab Titles -->
+    <string name="tab_steps">Bước</string>
+    <string name="tab_activity">Hoạt động</string>
+    <string name="tab_report">Báo cáo</string>
+    <string name="tab_achievement">Thành tích</string>
+    
+    <!-- Steps Screen -->
+    <string name="steps_title">Bước chân</string>
+    <string name="daily_goal">Mục tiêu hàng ngày</string>
+    <string name="steps">bước</string>
+    <string name="time">Thời gian</string>
+    <string name="kcal">Kcal</string>
+    <string name="km">Km</string>
+    <string name="active_minutes">Phút hoạt động</string>
+    <string name="view_activity_detail">Xem chi tiết</string>
+    <string name="view_all_activities">Xem tất cả hoạt động</string>
+    <string name="recent_activities">Hoạt động gần đây</string>
+    <string name="your_daily_goals">Mục tiêu hàng ngày</string>
+    <string name="weight_tracking">Theo dõi cân nặng</string>
+    <string name="current">Hiện tại</string>
+    <string name="recent_activity">Hoạt động gần đây</string>
+    <string name="view_report">Xem báo cáo</string>
+    
+    <!-- Activity Screen -->
+    <string name="activity_title">Hoạt động</string>
+    <string name="ready_to_start">Sẵn sàng bắt đầu</string>
+    <string name="gps_signal">Tín hiệu GPS tốt</string>
+    <string name="start_activity">Bắt đầu hoạt động</string>
+    <string name="stop_activity">Dừng hoạt động</string>
+    <string name="duration">Thời lượng</string>
+    <string name="speed">Tốc độ</string>
+    <string name="recent_activity_filter">Lọc hoạt động</string>
+    <string name="activities">Hoạt động</string>
+    
+    <!-- Report Screen -->
+    <string name="report_title">Báo cáo</string>
+    <string name="day">Ngày</string>
+    <string name="week">Tuần</string>
+    <string name="month">Tháng</string>
+    <string name="year">Năm</string>
+    <string name="total_steps">Tổng bước</string>
+    <string name="total_distance">Tổng khoảng cách</string>
+    <string name="calories_burned">Calo đã đốt</string>
+    <string name="daily_average">Trung bình hàng ngày</string>
+    <string name="steps_statistics">Thống kê bước chân</string>
+    <string name="weekly_comparison">So sánh tuần</string>
+    <string name="this_month">Tháng này</string>
+    <string name="last_month">Tháng trước</string>
+    <string name="daily_comparison">So sánh hàng ngày</string>
+    <string name="more_than_yesterday">bước nhiều hơn hôm qua!</string>
+    <string name="less_than_yesterday">bước ít hơn hôm qua</string>
+    
+    <!-- Achievement Screen -->
+    <string name="achievement_title">Thành tích</string>
+    <string name="your_progress">Tiến độ của bạn</string>
+    <string name="completed">hoàn thành</string>
+    <string name="unlocked">Đã mở khóa</string>
+    <string name="all">Tất cả</string>
+    <string name="daily_steps">Bước hàng ngày</string>
+    <string name="total_steps_ach">Tổng bước chân</string>
+    <string name="weekly_steps">Bước hàng tuần</string>
+    <string name="streaks">Chuỗi ngày</string>
+    <string name="distance">Khoảng cách</string>
+    <string name="calories">Calo</string>
+    <string name="active_time">Thời gian hoạt động</string>
+    <string name="special">Đặc biệt</string>
+    
+    <!-- Activity Detail -->
+    <string name="activity_detail">Chi tiết hoạt động</string>
+    <string name="timeline">Thời gian</string>
+    <string name="highest_speed">Tốc độ cao nhất</string>
+    <string name="average_speed">Tốc độ trung bình</string>
+    <string name="start_time">Thời gian bắt đầu</string>
+    <string name="end_time">Thời gian kết thúc</string>
+    <string name="start_location">Điểm bắt đầu</string>
+    <string name="end_location">Điểm kết thúc</string>
+    <string name="total_steps_activity">Tổng số bước</string>
+    <string name="calories_burned_activity">Calo đã đốt</string>
+    
+    <!-- Settings -->
+    <string name="settings">Cài đặt</string>
+    <string name="profile">Hồ sơ</string>
+    <string name="user_name">Tên người dùng</string>
+    <string name="daily_step_goal">Mục tiêu bước hàng ngày</string>
+    <string name="weight_kg">Cân nặng (kg)</string>
+    <string name="notifications">Thông báo</string>
+    <string name="receive_daily_reminders">Nhận nhắc nhở hàng ngày</string>
+    <string name="save_settings">Lưu cài đặt</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="select_language">Chọn ngôn ngữ</string>
+    <string name="english">Tiếng Anh</string>
+    <string name="vietnamese">Tiếng Việt</string>
+    <string name="share">Chia sẻ</string>
+    <string name="rate_us">Đánh giá ứng dụng</string>
+    <string name="about">Về chúng tôi</string>
+    <string name="privacy_policy">Chính sách riêng tư</string>
+    <string name="share_via">Chia sẻ qua</string>
+    <string name="about_message">Đếm Bước v1.0\nTheo dõi hoạt động hàng ngày và đạt mục tiêu của bạn!</string>
+    <string name="coming_soon">Sắp ra mắt</string>
+    <string name="settings_saved">Đã lưu cài đặt</string>
+    <string name="share_message">Hãy thử ứng dụng Đếm Bước! Theo dõi bước chân, calo và khoảng cách hàng ngày. Tải ngay!</string>
+    
+    <!-- Notifications -->
+    <string name="tracking_notification_title">Đếm Bước - Đang ghi</string>
+    <string name="tracking_notification_text">Đang ghi lộ trình của bạn...</string>
+    <!-- Map -->
+    <string name="map_view">Bản đồ</string>
+    <string name="map_placeholder">Bản đồ\n(Tích hợp Google Maps)</string>
+    <!-- Format Strings -->
+    <string name="steps_format">%d bước</string>
+    <string name="kcal_km_format">%d kcal • %.1f km</string>
+    
+    <!-- Report Period Labels -->
+    <string name="total_steps_label">Tổng bước chân</string>
+    <string name="total_distance_label">Tổng khoảng cách</string>
+    <string name="total_calories_label">Tổng calo</string>
+    <string name="daily_average_label">Trung bình hàng ngày</string>
+</resources>

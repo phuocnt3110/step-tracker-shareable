@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Contador de Pasos</string>
+    <string name="tab_steps">Pasos</string>
+    <string name="tab_activity">Actividad</string>
+    <string name="tab_report">Informe</string>
+    <string name="tab_achievement">Logro</string>
+    <string name="settings">Ajustes</string>
+    <string name="language">Idioma</string>
+    <string name="select_language">Seleccionar idioma</string>
+    <string name="daily_goal">Meta diaria</string>
+    <string name="steps">pasos</string>
+    <string name="time">Tiempo</string>
+    <string name="kcal">Kcal</string>
+    <string name="km">Km</string>
+    <string name="recent_activities">Actividades recientes</string>
+    <string name="save_settings">Guardar</string>
+    <string name="settings_saved">Ajustes guardados</string>
+    <string name="share">Compartir</string>
+    <string name="rate_us">Valorar</string>
+    <string name="about">Acerca de</string>
+    <string name="privacy_policy">Política de privacidad</string>
+</resources>
