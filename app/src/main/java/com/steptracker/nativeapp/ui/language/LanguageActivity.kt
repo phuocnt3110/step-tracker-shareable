@@ -42,6 +42,14 @@ class LanguageActivity : AppCompatActivity() {
         // Preload interstitial
         NphAds.preload(this, AdNamespaces.INTER_LANGUAGE)
 
+        // Load native ad
+        val nativeContainer: FrameLayout = findViewById(R.id.native_ad_container)
+        NphAds.loadNativeInto(nativeContainer, AdNamespaces.NATIVE_ACTIVITY_LIST)
+
+        // Load banner ad
+        val bannerContainer: FrameLayout = findViewById(R.id.banner_ad_container)
+        NphAds.loadBannerInto(bannerContainer, AdNamespaces.BANNER_HOME_BOTTOM)
+
         setupUI()
         setupRecyclerView()
     }
