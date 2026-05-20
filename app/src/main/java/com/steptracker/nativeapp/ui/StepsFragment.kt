@@ -22,7 +22,10 @@ import com.steptracker.nativeapp.R
 import com.steptracker.nativeapp.data.DailyData
 import com.steptracker.nativeapp.data.DataRepository
 import com.nphlab.sdk.ads.NphAds
+import com.nphlab.sdk.ads.listener.NphRewardListener
+import com.nphlab.sdk.ads.AdError
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class StepsFragment : Fragment() {
@@ -86,6 +89,35 @@ class StepsFragment : Fragment() {
 
         view.findViewById<View>(R.id.btnViewDetail).setOnClickListener {
             startActivity(Intent(requireContext(), ActivityDetailActivity::class.java))
+        }
+
+        view.findViewById<View>(R.id.btnDoubleSteps)?.setOnClickListener {
+            activity?.let { act ->
+                NphAds.showRewarded(
+                    activity = act,
+                    nameSpace = AdNamespaces.REWARD_DOUBLE_STEPS,
+                    listener = object : NphRewardListener() {
+                        override fun onRewardEarned(rewardType: String, rewardAmount: Int) {
+                            viewLifecycleOwner.lifecycleScope.launch {
+                                val data = viewModel.todayData.first().firstOrNull()
+                                val bonus = data?.currentSteps ?: 0
+                                if (bonus > 0) {
+                                    viewModel.addBonusSteps(bonus)
+                                    android.widget.Toast.makeText(act,
+                                        "2x Bonus! +$bonus steps",
+                                        android.widget.Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+                        override fun onAdDismissed() {}
+                        override fun onAdFailed(error: AdError) {
+                            android.widget.Toast.makeText(requireContext(),
+                                "Ad not available, try again later",
+                                android.widget.Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                )
+            }
         }
 
         btnActivitySettings.setOnClickListener {

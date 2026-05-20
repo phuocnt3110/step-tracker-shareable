@@ -108,23 +108,46 @@ class MainActivity : AppCompatActivity() {
         }
     }
     
+    private var currentTabId = R.id.nav_steps
+
     private fun setupBottomNavigation() {
         bottomNav = findViewById(R.id.bottomNavigation)
         
         bottomNav.setOnItemSelectedListener { item ->
+            val previousTab = currentTabId
+            currentTabId = item.itemId
             when (item.itemId) {
                 R.id.nav_steps -> {
-                    showFragment(StepsFragment())
+                    // Show interstitial when leaving Achievement tab
+                    if (previousTab == R.id.nav_achievement) {
+                        showInterstitialAndThen(AdNamespaces.INTER_ACHIEVEMENT_BACK) {
+                            showFragment(StepsFragment())
+                        }
+                    } else {
+                        showFragment(StepsFragment())
+                    }
                     true
                 }
                 R.id.nav_activity -> {
-                    showInterstitialAd {
-                        showFragment(ActivityFragment())
+                    if (previousTab == R.id.nav_achievement) {
+                        showInterstitialAndThen(AdNamespaces.INTER_ACHIEVEMENT_BACK) {
+                            showFragment(ActivityFragment())
+                        }
+                    } else {
+                        showInterstitialAndThen(AdNamespaces.INTER_MAIN) {
+                            showFragment(ActivityFragment())
+                        }
                     }
                     true
                 }
                 R.id.nav_report -> {
-                    showFragment(ReportFragment())
+                    if (previousTab == R.id.nav_achievement) {
+                        showInterstitialAndThen(AdNamespaces.INTER_ACHIEVEMENT_BACK) {
+                            showFragment(ReportFragment())
+                        }
+                    } else {
+                        showFragment(ReportFragment())
+                    }
                     true
                 }
                 R.id.nav_achievement -> {
@@ -147,10 +170,10 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun showInterstitialAd(onComplete: () -> Unit) {
+    private fun showInterstitialAndThen(nameSpace: String, onComplete: () -> Unit) {
         NphAds.showInterstitial(
             activity = this,
-            nameSpace = AdNamespaces.INTER_MAIN,
+            nameSpace = nameSpace,
             listener = object : NphAdListener() {
                 override fun onAdDismissed() {
                     onComplete()
