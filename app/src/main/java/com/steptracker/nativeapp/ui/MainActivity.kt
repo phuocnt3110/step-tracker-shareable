@@ -79,7 +79,9 @@ class MainActivity : AppCompatActivity() {
         NphAds.preload(this, AdNamespaces.INTER_MAIN)
         NphAds.preload(this, AdNamespaces.INTER_SETTINGS)
         NphAds.preload(this, AdNamespaces.INTER_ACTIVITY_DETAIL)
+        NphAds.preload(this, AdNamespaces.INTER_ACHIEVEMENT_BACK)
         NphAds.preload(this, AdNamespaces.NATIVE_ACTIVITY_LIST)
+        NphAds.preload(this, AdNamespaces.NATIVE_REPORT)
         
         // Handle back button: go to home tab or minimize app
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {

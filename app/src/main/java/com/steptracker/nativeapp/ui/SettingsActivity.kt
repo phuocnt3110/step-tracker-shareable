@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -53,6 +54,10 @@ class SettingsActivity : AppCompatActivity() {
         initViews()
         setupListeners()
         loadSettings()
+
+        // Load banner ad at bottom
+        val bannerContainer = findViewById<FrameLayout>(R.id.bannerAdContainer)
+        bannerContainer?.let { NphAds.loadBannerInto(it, AdNamespaces.BANNER_SETTINGS_BOTTOM) }
     }
     
     private fun initViews() {

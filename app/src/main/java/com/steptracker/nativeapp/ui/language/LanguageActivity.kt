@@ -42,9 +42,9 @@ class LanguageActivity : AppCompatActivity() {
         // Preload interstitial
         NphAds.preload(this, AdNamespaces.INTER_LANGUAGE)
 
-        // Load native ad
+        // Load native ad (small size — less intrusive for language picker)
         val nativeContainer: FrameLayout = findViewById(R.id.native_ad_container)
-        NphAds.loadNativeInto(nativeContainer, AdNamespaces.NATIVE_ACTIVITY_LIST)
+        NphAds.loadNativeInto(nativeContainer, AdNamespaces.NATIVE_LANGUAGE)
 
         // Load banner ad
         val bannerContainer: FrameLayout = findViewById(R.id.banner_ad_container)

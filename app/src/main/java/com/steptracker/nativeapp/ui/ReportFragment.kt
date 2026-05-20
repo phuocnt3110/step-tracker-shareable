@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
@@ -14,6 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.*
+import com.nphlab.sdk.ads.NphAds
 import com.steptracker.nativeapp.R
 import com.steptracker.nativeapp.data.DailyData
 import com.steptracker.nativeapp.data.DataRepository
@@ -61,6 +63,14 @@ class ReportFragment : Fragment() {
         setupPeriodButtons()
         setupCharts()
         observeData()
+
+        // Load native ad (blends between cards)
+        val nativeContainer = view.findViewById<FrameLayout>(R.id.nativeAdContainer)
+        nativeContainer?.let { NphAds.loadNativeInto(it, AdNamespaces.NATIVE_REPORT) }
+
+        // Load banner ad (bottom of scroll)
+        val bannerContainer = view.findViewById<FrameLayout>(R.id.bannerAdContainer)
+        bannerContainer?.let { NphAds.loadBannerInto(it, AdNamespaces.BANNER_REPORT_BOTTOM) }
     }
     
     private fun setupPeriodButtons() {
