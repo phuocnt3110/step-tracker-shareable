@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Брояч на стъпки</string>
+    <string name="tab_steps">Стъпки</string>
+    <string name="tab_activity">Активност</string>
+    <string name="tab_report">Отчет</string>
+    <string name="tab_achievement">Постижение</string>
+    <string name="settings">Настройки</string>
+    <string name="language">Език</string>
+    <string name="select_language">Изберете език</string>
+    <string name="daily_goal">Дневна цел</string>
+    <string name="steps">стъпки</string>
+    <string name="time">Време</string>
+    <string name="kcal">Kcal</string>
+    <string name="km">Km</string>
+    <string name="recent_activities">Последни активности</string>
+    <string name="save_settings">Запази</string>
+    <string name="settings_saved">Настройките са запазени</string>
+    <string name="share">Сподели</string>
+    <string name="rate_us">Оцени</string>
+    <string name="about">За нас</string>
+    <string name="privacy_policy">Политика за поверителност</string>
+</resources>

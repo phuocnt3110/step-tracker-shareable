@@ -91,6 +91,7 @@
     <string name="receive_daily_reminders">Nhận nhắc nhở hàng ngày</string>
     <string name="save_settings">Lưu cài đặt</string>
     <string name="language">Ngôn ngữ</string>
+    <string name="select_language">Chọn ngôn ngữ</string>
     <string name="english">Tiếng Anh</string>
     <string name="vietnamese">Tiếng Việt</string>
     <string name="share">Chia sẻ</string>

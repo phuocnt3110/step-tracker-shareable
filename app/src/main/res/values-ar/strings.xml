@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">عداد الخطوات</string>
+    <string name="tab_steps">الخطوات</string>
+    <string name="tab_activity">النشاط</string>
+    <string name="tab_report">التقرير</string>
+    <string name="tab_achievement">الإنجاز</string>
+    <string name="settings">الإعدادات</string>
+    <string name="language">اللغة</string>
+    <string name="select_language">اختر اللغة</string>
+    <string name="daily_goal">الهدف اليومي</string>
+    <string name="steps">خطوات</string>
+    <string name="time">الوقت</string>
+    <string name="kcal">سعرة</string>
+    <string name="km">كم</string>
+    <string name="recent_activities">الأنشطة الأخيرة</string>
+    <string name="save_settings">حفظ</string>
+    <string name="settings_saved">تم حفظ الإعدادات</string>
+    <string name="share">مشاركة</string>
+    <string name="rate_us">تقييم</string>
+    <string name="about">حول</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+</resources>

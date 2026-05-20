@@ -40,7 +40,7 @@ class ActivityDetailActivity : AppCompatActivity() {
                 handler.postDelayed(fallback, 3000)
                 NphAds.showInterstitial(
                     activity = this@ActivityDetailActivity,
-                    nameSpace = "nsp_inter_activity_detail",
+                    nameSpace = AdNamespaces.INTER_ACTIVITY_DETAIL,
                     listener = object : NphAdListener() {
                         override fun onAdDismissed() {
                             handler.removeCallbacks(fallback)
@@ -120,5 +120,10 @@ class ActivityDetailActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
+    }
+
+    override fun onDestroy() {
+        NphAds.destroy(this)
+        super.onDestroy()
     }
 }

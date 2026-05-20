@@ -184,7 +184,7 @@ class AchievementAdapter(
         fragment.activity?.let { activity ->
             NphAds.showRewarded(
                 activity = activity,
-                nameSpace = "nsp_reward_achievement",
+                nameSpace = AdNamespaces.REWARD_ACHIEVEMENT,
                 listener = object : NphRewardListener() {
                     override fun onRewardEarned(rewardType: String, rewardAmount: Int) {
                         // Reward earned - grant to user

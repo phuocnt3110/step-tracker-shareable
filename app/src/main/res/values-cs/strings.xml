@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Počítadlo kroků</string>
+    <string name="tab_steps">Kroky</string>
+    <string name="tab_activity">Aktivita</string>
+    <string name="tab_report">Zpráva</string>
+    <string name="tab_achievement">Úspěch</string>
+    <string name="settings">Nastavení</string>
+    <string name="language">Jazyk</string>
+    <string name="select_language">Vyberte jazyk</string>
+    <string name="daily_goal">Denní cíl</string>
+    <string name="steps">kroků</string>
+    <string name="time">Čas</string>
+    <string name="kcal">Kcal</string>
+    <string name="km">Km</string>
+    <string name="recent_activities">Poslední aktivity</string>
+    <string name="save_settings">Uložit</string>
+    <string name="settings_saved">Nastavení uloženo</string>
+    <string name="share">Sdílet</string>
+    <string name="rate_us">Hodnotit</string>
+    <string name="about">O aplikaci</string>
+    <string name="privacy_policy">Zásady ochrany osobních údajů</string>
+</resources>

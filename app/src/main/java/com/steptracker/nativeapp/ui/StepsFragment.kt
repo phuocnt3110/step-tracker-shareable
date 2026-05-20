@@ -95,7 +95,7 @@ class StepsFragment : Fragment() {
         // Load banner ad (delay to ensure SDK ready)
         val bannerContainer = view.findViewById<android.widget.FrameLayout>(R.id.bannerAdContainer)
         bannerContainer?.postDelayed({
-            NphAds.loadBannerInto(bannerContainer, "nsp_bn_home_bottom")
+            NphAds.loadBannerInto(bannerContainer, AdNamespaces.BANNER_HOME_BOTTOM)
         }, 1500)
         
         observeData()

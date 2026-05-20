@@ -36,7 +36,7 @@ class ActivityListActivity : AppCompatActivity() {
         // Load native ad
         val nativeAdContainer = findViewById<FrameLayout>(R.id.nativeAdContainer)
         nativeAdContainer?.let {
-            NphAds.loadNativeInto(it, "nsp_native_activity_list")
+            NphAds.loadNativeInto(it, AdNamespaces.NATIVE_ACTIVITY_LIST)
         }
         
         // Register back press callback with interstitial ad and timeout fallback
@@ -50,7 +50,7 @@ class ActivityListActivity : AppCompatActivity() {
                 handler.postDelayed(fallback, 3000)
                 NphAds.showInterstitial(
                     activity = this@ActivityListActivity,
-                    nameSpace = "nsp_inter_main",
+                    nameSpace = AdNamespaces.INTER_MAIN,
                     listener = object : com.nphlab.sdk.ads.listener.NphAdListener() {
                         override fun onAdDismissed() {
                             handler.removeCallbacks(fallback)
@@ -96,6 +96,11 @@ class ActivityListActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
+    }
+
+    override fun onDestroy() {
+        NphAds.destroy(this)
+        super.onDestroy()
     }
 }
 

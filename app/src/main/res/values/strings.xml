@@ -94,6 +94,7 @@
     <string name="active_time">Active Time</string>
     <string name="special">Special</string>
     <string name="language">Language</string>
+    <string name="select_language">Select Language</string>
     <string name="english">English</string>
     <string name="vietnamese">Tiếng Việt</string>
     <string name="share">Share</string>

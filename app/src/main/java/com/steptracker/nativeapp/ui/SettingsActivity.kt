@@ -20,6 +20,7 @@ import com.nphlab.sdk.ads.AdError
 import com.steptracker.nativeapp.R
 import com.steptracker.nativeapp.data.DataRepository
 import com.steptracker.nativeapp.data.UserSettings
+import com.steptracker.nativeapp.ui.language.LanguageActivity
 import kotlinx.coroutines.launch
 
 class SettingsActivity : AppCompatActivity() {
@@ -35,6 +36,7 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var btnSave: MaterialButton
     
     // App info views
+    private lateinit var btnLanguage: LinearLayout
     private lateinit var btnShare: LinearLayout
     private lateinit var btnRate: LinearLayout
     private lateinit var btnAbout: LinearLayout
@@ -64,6 +66,7 @@ class SettingsActivity : AppCompatActivity() {
         btnSave = findViewById(R.id.btnSave)
         
         // App Info
+        btnLanguage = findViewById(R.id.btnLanguage)
         btnShare = findViewById(R.id.btnShare)
         btnRate = findViewById(R.id.btnRate)
         btnAbout = findViewById(R.id.btnAbout)
@@ -89,7 +92,7 @@ class SettingsActivity : AppCompatActivity() {
                 handler.postDelayed(fallback, 3000)
                 NphAds.showInterstitial(
                     activity = this@SettingsActivity,
-                    nameSpace = "nsp_inter_settings",
+                    nameSpace = AdNamespaces.INTER_SETTINGS,
                     listener = object : NphAdListener() {
                         override fun onAdDismissed() {
                             handler.removeCallbacks(fallback)
@@ -113,6 +116,11 @@ class SettingsActivity : AppCompatActivity() {
         }
         
         // App info actions
+        btnLanguage.setOnClickListener {
+            val intent = Intent(this, LanguageActivity::class.java)
+            intent.putExtra("from_settings", true)
+            startActivity(intent)
+        }
         btnShare.setOnClickListener { shareApp() }
         btnRate.setOnClickListener { rateApp() }
         btnAbout.setOnClickListener { showAbout() }
@@ -181,5 +189,10 @@ class SettingsActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
+    }
+
+    override fun onDestroy() {
+        NphAds.destroy(this)
+        super.onDestroy()
     }
 }

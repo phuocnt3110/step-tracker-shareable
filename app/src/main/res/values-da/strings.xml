@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Skridttæller</string>
+    <string name="tab_steps">Skridt</string>
+    <string name="tab_activity">Aktivitet</string>
+    <string name="tab_report">Rapport</string>
+    <string name="tab_achievement">Præstation</string>
+    <string name="settings">Indstillinger</string>
+    <string name="language">Sprog</string>
+    <string name="select_language">Vælg sprog</string>
+    <string name="daily_goal">Dagligt mål</string>
+    <string name="steps">skridt</string>
+    <string name="time">Tid</string>
+    <string name="kcal">Kcal</string>
+    <string name="km">Km</string>
+    <string name="recent_activities">Seneste aktiviteter</string>
+    <string name="save_settings">Gem</string>
+    <string name="settings_saved">Indstillinger gemt</string>
+    <string name="share">Del</string>
+    <string name="rate_us">Bedøm</string>
+    <string name="about">Om</string>
+    <string name="privacy_policy">Privatlivspolitik</string>
+</resources>

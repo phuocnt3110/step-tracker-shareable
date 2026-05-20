@@ -25,9 +25,16 @@ import com.nphlab.sdk.ads.NphAds
 import com.nphlab.sdk.ads.listener.NphAdListener
 import com.nphlab.sdk.ads.AdError
 import androidx.activity.OnBackPressedCallback
+import com.steptracker.nativeapp.util.LanguageUtil
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        val langCode = LanguageUtil.getSavedLanguage(newBase)
+        super.attachBaseContext(LanguageUtil.applyLanguage(newBase, langCode))
+    }
+
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var repository: DataRepository
     private lateinit var stepCounterManager: StepCounterManager
@@ -67,6 +74,12 @@ class MainActivity : AppCompatActivity() {
         stepCounterManager = StepCounterManager.getInstance(this)
         
         setupBottomNavigation()
+        
+        // Preload ads for sub-screens
+        NphAds.preload(this, AdNamespaces.INTER_MAIN)
+        NphAds.preload(this, AdNamespaces.INTER_SETTINGS)
+        NphAds.preload(this, AdNamespaces.INTER_ACTIVITY_DETAIL)
+        NphAds.preload(this, AdNamespaces.NATIVE_ACTIVITY_LIST)
         
         // Handle back button: go to home tab or minimize app
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
@@ -135,7 +148,7 @@ class MainActivity : AppCompatActivity() {
     private fun showInterstitialAd(onComplete: () -> Unit) {
         NphAds.showInterstitial(
             activity = this,
-            nameSpace = "nsp_inter_main",
+            nameSpace = AdNamespaces.INTER_MAIN,
             listener = object : NphAdListener() {
                 override fun onAdDismissed() {
                     onComplete()

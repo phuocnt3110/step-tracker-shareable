@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">شمارشگر قدم</string>
+    <string name="tab_steps">قدم‌ها</string>
+    <string name="tab_activity">فعالیت</string>
+    <string name="tab_report">گزارش</string>
+    <string name="tab_achievement">دستاورد</string>
+    <string name="settings">تنظیمات</string>
+    <string name="language">زبان</string>
+    <string name="select_language">زبان را انتخاب کنید</string>
+    <string name="daily_goal">هدف روزانه</string>
+    <string name="steps">قدم</string>
+    <string name="time">زمان</string>
+    <string name="kcal">کالری</string>
+    <string name="km">کیلومتر</string>
+    <string name="recent_activities">فعالیت‌های اخیر</string>
+    <string name="save_settings">ذخیره</string>
+    <string name="settings_saved">تنظیمات ذخیره شد</string>
+    <string name="share">اشتراک‌گذاری</string>
+    <string name="rate_us">امتیاز</string>
+    <string name="about">درباره</string>
+    <string name="privacy_policy">سیاست حفظ حریم خصوصی</string>
+</resources>

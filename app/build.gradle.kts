@@ -78,9 +78,9 @@ dependencies {
     // ══════════════════════════════════════════════════
     // NPH SDK
     // ══════════════════════════════════════════════════
-    implementation(files("libs/nph-ads-1.0.1-release.aar"))
-    implementation(files("libs/nph-config-1.0.1-release.aar"))
-    implementation(files("libs/nph-track-1.0.1-release.aar"))
+    implementation(files("libs/nph-ads-1.0.5-release.aar"))
+    implementation(files("libs/nph-config-1.0.5-release.aar"))
+    implementation(files("libs/nph-track-1.0.5-release.aar"))
 
     // Google Mobile Ads
     implementation("com.google.android.gms:play-services-ads:24.0.0")
