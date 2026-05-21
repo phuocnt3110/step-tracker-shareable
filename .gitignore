@@ -4,6 +4,5 @@
 build/
 *.iml
 local.properties
-app/google-services.json
 *.jks
 *.keystore

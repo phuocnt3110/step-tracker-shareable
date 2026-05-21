@@ -364,11 +364,5 @@
         app:cornerRadius="12dp"
         app:backgroundTint="@color/emerald_500" />
 
-    <!-- Banner Ad Container — below save button, doesn't block any interaction -->
-    <FrameLayout
-        android:id="@+id/bannerAdContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
 
 </LinearLayout>

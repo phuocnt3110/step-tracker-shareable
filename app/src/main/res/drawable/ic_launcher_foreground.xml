@@ -1,0 +1,13 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Footsteps / walking person icon -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,30 C56.76,30 59,32.24 59,35 C59,37.76 56.76,40 54,40 C51.24,40 49,37.76 49,35 C49,32.24 51.24,30 54,30z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M58.5,43 L49.5,43 C47.57,43 46,44.57 46,46.5 L46,58 L49,58 L49,75 L53,75 L53,63 L55,63 L55,75 L59,75 L59,58 L62,58 L62,46.5 C62,44.57 60.43,43 58.5,43z"/>
+</vector>

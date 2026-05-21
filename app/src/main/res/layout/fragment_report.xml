@@ -299,14 +299,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Native Ad Container (blends between cards) -->
-        <FrameLayout
-            android:id="@+id/nativeAdContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:visibility="gone" />
-
         <!-- Weekly Comparison Chart -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -384,14 +376,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Banner Ad Container -->
-        <FrameLayout
-            android:id="@+id/bannerAdContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="16dp"
-            android:visibility="gone" />
 
     </LinearLayout>
 </ScrollView>

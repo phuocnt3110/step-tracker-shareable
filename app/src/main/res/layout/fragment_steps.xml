@@ -492,14 +492,5 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Banner Ad Container — at scroll bottom, not blocking content -->
-        <FrameLayout
-            android:id="@+id/bannerAdContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:visibility="gone" />
-
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
