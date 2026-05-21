@@ -104,6 +104,10 @@
     <string name="settings_saved">Đã lưu cài đặt</string>
     <string name="share_message">Hãy thử ứng dụng Đếm Bước! Theo dõi bước chân, calo và khoảng cách hàng ngày. Tải ngay!</string>
     
+    <!-- Sensor -->
+    <string name="sensor_connected">Cảm biến bước chân đã kết nối. Đang theo dõi bước chân!</string>
+    <string name="sensor_unavailable">Thiết bị không có cảm biến bước chân</string>
+    
     <!-- Notifications -->
     <string name="tracking_notification_title">Đếm Bước - Đang ghi</string>
     <string name="tracking_notification_text">Đang ghi lộ trình của bạn...</string>

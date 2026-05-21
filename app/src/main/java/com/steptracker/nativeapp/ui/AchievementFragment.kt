@@ -29,6 +29,7 @@ class AchievementFragment : Fragment() {
     private lateinit var chipGroup: ChipGroup
     private lateinit var tvProgress: TextView
     private lateinit var progressBar: ProgressBar
+    private lateinit var tvCompletedPercent: TextView
     
     private var currentCategory = "all"
     private lateinit var categoryMap: Map<String, String>
@@ -66,6 +67,7 @@ class AchievementFragment : Fragment() {
         chipGroup = view.findViewById(R.id.chipGroup)
         tvProgress = view.findViewById(R.id.tvProgress)
         progressBar = view.findViewById(R.id.progressBar)
+        tvCompletedPercent = view.findViewById(R.id.tvCompletedPercent)
         
         setupRecyclerView()
         setupChips()
@@ -77,19 +79,25 @@ class AchievementFragment : Fragment() {
     }
     
     private fun setupChips() {
+        chipGroup.isSingleSelection = true
+        chipGroup.isSelectionRequired = true
+        
         categoryMap.forEach { (key, label) ->
             val chip = Chip(requireContext()).apply {
                 text = label
                 isCheckable = true
                 isChecked = key == "all"
-                setOnCheckedChangeListener { _, isChecked ->
-                    if (isChecked) {
-                        currentCategory = key
-                        updateAchievementList()
-                    }
-                }
+                tag = key
             }
             chipGroup.addView(chip)
+        }
+        
+        chipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
+            if (checkedIds.isNotEmpty()) {
+                val selectedChip = group.findViewById<Chip>(checkedIds.first())
+                currentCategory = selectedChip?.tag as? String ?: "all"
+                updateAchievementList()
+            }
         }
     }
     
@@ -105,7 +113,9 @@ class AchievementFragment : Fragment() {
                     val unlockedCount = achievements.count { it.unlocked }
                     val totalCount = achievements.size
                     tvProgress.text = "$unlockedCount/$totalCount ${getString(R.string.unlocked)}"
-                    progressBar.progress = (unlockedCount * 100 / totalCount)
+                    val percent = if (totalCount > 0) (unlockedCount * 100 / totalCount) else 0
+                    progressBar.progress = percent
+                    tvCompletedPercent.text = "$percent% ${getString(R.string.completed)}"
                 }
             }
         }

@@ -107,6 +107,10 @@
     <string name="share_message">Check out Step Tracker app! Track your daily steps, calories, and distance. Download now!</string>
     <string name="privacy_policy">Privacy Policy</string>
     
+    <!-- Sensor -->
+    <string name="sensor_connected">Step sensor connected. Tracking your steps!</string>
+    <string name="sensor_unavailable">No step sensor available on this device</string>
+    
     <!-- Notifications -->
     <string name="tracking_notification_title">Step Tracker - Recording Activity</string>
     <string name="tracking_notification_text">Recording your route...</string>

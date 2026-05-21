@@ -17,6 +17,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.steptracker.nativeapp.R
 import com.steptracker.nativeapp.data.DataRepository
 import com.steptracker.nativeapp.sensor.ActivityTrackingService
@@ -191,6 +192,10 @@ class MainActivity : AppCompatActivity() {
                 if (stepCounterManager.isAvailable.value) {
                     stepCounterManager.startTracking()
                     
+                    // Show connection notification once
+                    val rootView = findViewById<android.view.View>(R.id.fragmentContainer)
+                    Snackbar.make(rootView, getString(R.string.sensor_connected), Snackbar.LENGTH_SHORT).show()
+                    
                     // Only write to DB when we have real sensor data (not the initial 0)
                     stepCounterManager.currentSteps.collect { steps ->
                         if (stepCounterManager.hasSensorData.value || steps > 0) {
@@ -198,11 +203,8 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 } else {
-                    Toast.makeText(
-                        this@MainActivity, 
-                        "No step sensor available on this device", 
-                        Toast.LENGTH_LONG
-                    ).show()
+                    val rootView = findViewById<android.view.View>(R.id.fragmentContainer)
+                    Snackbar.make(rootView, getString(R.string.sensor_unavailable), Snackbar.LENGTH_LONG).show()
                 }
             }
         }

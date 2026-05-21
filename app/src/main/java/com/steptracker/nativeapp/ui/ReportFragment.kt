@@ -14,10 +14,14 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.steptracker.nativeapp.R
 import com.steptracker.nativeapp.data.DailyData
 import com.steptracker.nativeapp.data.DataRepository
 import kotlinx.coroutines.launch
+import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
+import java.util.Locale
 
 class ReportFragment : Fragment() {
     private lateinit var viewModel: ReportViewModel
@@ -31,6 +35,7 @@ class ReportFragment : Fragment() {
     private lateinit var btnWeek: com.google.android.material.button.MaterialButton
     private lateinit var btnMonth: com.google.android.material.button.MaterialButton
     private lateinit var btnYear: com.google.android.material.button.MaterialButton
+    private lateinit var tvPeriodLabel: TextView
     
     private var currentPeriod = "week"
     
@@ -57,6 +62,7 @@ class ReportFragment : Fragment() {
         btnWeek = view.findViewById(R.id.btnWeek)
         btnMonth = view.findViewById(R.id.btnMonth)
         btnYear = view.findViewById(R.id.btnYear)
+        tvPeriodLabel = view.findViewById(R.id.tvPeriodLabel)
         
         setupPeriodButtons()
         setupCharts()
@@ -151,6 +157,19 @@ class ReportFragment : Fragment() {
         tvTotalDistance.text = String.format("%.1f km", totalDistance)
         tvTotalCalories.text = "$totalCalories kcal"
         tvDailyAverage.text = avgDaily.toString()
+        
+        // Update period label
+        tvPeriodLabel.text = when (currentPeriod) {
+            "day" -> java.time.LocalDate.now().format(DateTimeFormatter.ofPattern("MMM d, yyyy"))
+            "week" -> {
+                val now = java.time.LocalDate.now()
+                val weekAgo = now.minusDays(6)
+                "${weekAgo.format(DateTimeFormatter.ofPattern("MMM d"))} - ${now.format(DateTimeFormatter.ofPattern("MMM d"))}"
+            }
+            "month" -> java.time.LocalDate.now().format(DateTimeFormatter.ofPattern("MMMM yyyy"))
+            "year" -> java.time.LocalDate.now().year.toString()
+            else -> ""
+        }
     }
     
     private fun updateBarChart(data: List<DailyData>) {
@@ -163,6 +182,20 @@ class ReportFragment : Fragment() {
             setDrawValues(false)
         }
         
+        // X-axis date labels
+        val labels = data.map { day ->
+            when (currentPeriod) {
+                "day" -> day.date.format(DateTimeFormatter.ofPattern("HH"))
+                "week" -> day.date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault())
+                "month" -> day.date.dayOfMonth.toString()
+                "year" -> day.date.month.getDisplayName(TextStyle.SHORT, Locale.getDefault())
+                else -> day.date.dayOfMonth.toString()
+            }
+        }
+        
+        barChart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
+        barChart.xAxis.granularity = 1f
+        barChart.xAxis.labelCount = minOf(labels.size, 7)
         barChart.data = BarData(dataSet)
         barChart.invalidate()
     }
