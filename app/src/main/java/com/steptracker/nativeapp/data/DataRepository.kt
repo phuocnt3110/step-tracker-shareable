@@ -3,7 +3,6 @@ package com.steptracker.nativeapp.data
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
@@ -164,11 +163,7 @@ class DataRepository(context: Context) {
     }
 
     suspend fun initializeAchievements() = withContext(Dispatchers.IO) {
-        // Only insert if table is empty to preserve progress
-        val existing = achievementDao.getUnlockedCount()
-        val allCount = achievementDao.getAll().first().size
-        if (allCount > 0) return@withContext
-        
+        // Use IGNORE strategy: inserts missing achievements, preserves existing ones' progress
         val achievements = listOf(
             // Daily Steps - Beginner
             Achievement("first_steps", "First Steps", "Walk 1,000 steps in a day", "dailySteps", 1000, icon = "footprints", color = "#10b981"),
@@ -242,7 +237,7 @@ class DataRepository(context: Context) {
             Achievement("social_sharer", "Social Sharer", "Share your progress 5 times", "special", 5, icon = "share-2", color = "#8b5cf6"),
             Achievement("settings_master", "Settings Master", "Customize your profile", "special", 1, icon = "user-check", color = "#10b981")
         )
-        achievementDao.insertAll(achievements)
+        achievementDao.insertAllIgnore(achievements)
     }
 
     private suspend fun checkAchievements() {
