@@ -15,9 +15,6 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.switchmaterial.SwitchMaterial
-import com.nphlab.sdk.ads.NphAds
-import com.nphlab.sdk.ads.listener.NphAdListener
-import com.nphlab.sdk.ads.AdError
 import com.steptracker.nativeapp.R
 import com.steptracker.nativeapp.data.DataRepository
 import com.steptracker.nativeapp.data.UserSettings
@@ -54,10 +51,6 @@ class SettingsActivity : AppCompatActivity() {
         initViews()
         setupListeners()
         loadSettings()
-
-        // Load banner ad at bottom
-        val bannerContainer = findViewById<FrameLayout>(R.id.bannerAdContainer)
-        bannerContainer?.let { NphAds.loadBannerInto(it, AdNamespaces.BANNER_SETTINGS_BOTTOM) }
     }
     
     private fun initViews() {
@@ -86,29 +79,10 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
         
-        // Register back press callback with interstitial ad and timeout fallback
+        // Register back press callback
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            private var isHandling = false
             override fun handleOnBackPressed() {
-                if (isHandling) return
-                isHandling = true
-                val handler = android.os.Handler(mainLooper)
-                val fallback = Runnable { if (!isFinishing) finish() }
-                handler.postDelayed(fallback, 3000)
-                NphAds.showInterstitial(
-                    activity = this@SettingsActivity,
-                    nameSpace = AdNamespaces.INTER_SETTINGS,
-                    listener = object : NphAdListener() {
-                        override fun onAdDismissed() {
-                            handler.removeCallbacks(fallback)
-                            finish()
-                        }
-                        override fun onAdFailed(error: AdError) {
-                            handler.removeCallbacks(fallback)
-                            finish()
-                        }
-                    }
-                )
+                finish()
             }
         })
     }
@@ -197,7 +171,6 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        NphAds.destroy(this)
         super.onDestroy()
     }
 }

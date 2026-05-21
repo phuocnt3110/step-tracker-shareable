@@ -30,12 +30,7 @@
         android:theme="@style/Theme.StepTracker"
         tools:targetApi="31">
 
-        <!-- NPH AdMob App ID (test ID) -->
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
-
-        <!-- Splash Activity with App Open Ad -->
+        <!-- Splash Activity -->
         <activity
             android:name=".ui.SplashActivity"
             android:exported="true"

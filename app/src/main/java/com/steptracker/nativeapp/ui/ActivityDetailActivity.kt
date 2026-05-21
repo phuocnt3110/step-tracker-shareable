@@ -7,9 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.steptracker.nativeapp.R
 import com.steptracker.nativeapp.data.DataRepository
-import com.nphlab.sdk.ads.NphAds
-import com.nphlab.sdk.ads.listener.NphAdListener
-import com.nphlab.sdk.ads.AdError
 import kotlinx.coroutines.launch
 
 class ActivityDetailActivity : AppCompatActivity() {
@@ -29,29 +26,10 @@ class ActivityDetailActivity : AppCompatActivity() {
             }
         }
         
-        // Register back press callback with interstitial ad and timeout fallback
+        // Register back press callback
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            private var isHandling = false
             override fun handleOnBackPressed() {
-                if (isHandling) return
-                isHandling = true
-                val handler = android.os.Handler(mainLooper)
-                val fallback = Runnable { if (!isFinishing) finish() }
-                handler.postDelayed(fallback, 3000)
-                NphAds.showInterstitial(
-                    activity = this@ActivityDetailActivity,
-                    nameSpace = AdNamespaces.INTER_ACTIVITY_DETAIL,
-                    listener = object : NphAdListener() {
-                        override fun onAdDismissed() {
-                            handler.removeCallbacks(fallback)
-                            finish()
-                        }
-                        override fun onAdFailed(error: AdError) {
-                            handler.removeCallbacks(fallback)
-                            finish()
-                        }
-                    }
-                )
+                finish()
             }
         })
         
@@ -123,7 +101,6 @@ class ActivityDetailActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        NphAds.destroy(this)
         super.onDestroy()
     }
 }

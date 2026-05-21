@@ -17,9 +17,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.nphlab.sdk.ads.NphAds
-import com.nphlab.sdk.ads.listener.NphAdListener
-import com.nphlab.sdk.ads.AdError
 import com.steptracker.nativeapp.R
 import com.steptracker.nativeapp.data.DataRepository
 import com.steptracker.nativeapp.sensor.ActivityTrackingService
@@ -123,23 +120,7 @@ class ActivityFragment : Fragment() {
             
             updateButtonState()
             clearStats()
-
-            // Show interstitial after stopping activity (natural completion)
-            activity?.let { act ->
-                NphAds.pauseResumeAds()
-                NphAds.showInterstitial(act, AdNamespaces.INTER_ACTIVITY_COMPLETE,
-                    object : NphAdListener() {
-                        override fun onAdDismissed() {
-                            view?.postDelayed({ NphAds.resumeResumeAds() }, 2000)
-                        }
-                        override fun onAdFailed(error: AdError) {
-                            NphAds.resumeResumeAds()
-                        }
-                    })
-            }
         } else {
-            // Start tracking — preload interstitial for when user stops
-            activity?.let { NphAds.preload(it, AdNamespaces.INTER_ACTIVITY_COMPLETE) }
             if (service.startTracking()) {
                 updateButtonState()
             } else {

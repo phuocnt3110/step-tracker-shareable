@@ -3,17 +3,11 @@ package com.steptracker.nativeapp.ui.language
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.nphlab.sdk.ads.AdError
-import com.nphlab.sdk.ads.NphAds
-import com.nphlab.sdk.ads.listener.NphAdListener
 import com.steptracker.nativeapp.R
-import com.steptracker.nativeapp.ui.AdNamespaces
 import com.steptracker.nativeapp.ui.MainActivity
 import com.steptracker.nativeapp.util.LanguageUtil
 import java.util.Locale
@@ -39,17 +33,6 @@ class LanguageActivity : AppCompatActivity() {
         ivDone = findViewById(R.id.iv_done)
         rvLanguages = findViewById(R.id.rv_all_languages)
 
-        // Preload interstitial
-        NphAds.preload(this, AdNamespaces.INTER_LANGUAGE)
-
-        // Load native ad (small size — less intrusive for language picker)
-        val nativeContainer: FrameLayout = findViewById(R.id.native_ad_container)
-        NphAds.loadNativeInto(nativeContainer, AdNamespaces.NATIVE_LANGUAGE)
-
-        // Load banner ad
-        val bannerContainer: FrameLayout = findViewById(R.id.banner_ad_container)
-        NphAds.loadBannerInto(bannerContainer, AdNamespaces.BANNER_HOME_BOTTOM)
-
         setupUI()
         setupRecyclerView()
     }
@@ -61,11 +44,7 @@ class LanguageActivity : AppCompatActivity() {
         ivBack.setOnClickListener { finish() }
 
         ivDone.setOnClickListener {
-            NphAds.showInterstitial(this, AdNamespaces.INTER_LANGUAGE,
-                object : NphAdListener() {
-                    override fun onAdDismissed() { saveAndNavigate() }
-                    override fun onAdFailed(error: AdError) { saveAndNavigate() }
-                })
+            saveAndNavigate()
         }
     }
 
@@ -117,10 +96,5 @@ class LanguageActivity : AppCompatActivity() {
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
-    }
-
-    override fun onDestroy() {
-        NphAds.destroy(this)
-        super.onDestroy()
     }
 }

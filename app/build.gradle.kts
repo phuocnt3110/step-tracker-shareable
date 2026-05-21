@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.googleServices)
 }
 
 android {
@@ -75,27 +74,4 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // ══════════════════════════════════════════════════
-    // NPH SDK v1.0.5 — DO NOT MODIFY
-    // ══════════════════════════════════════════════════
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar"))))
-
-    // Google Mobile Ads
-    implementation("com.google.android.gms:play-services-ads:24.0.0")
-
-    // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
-    implementation("com.google.firebase:firebase-config-ktx")
-    implementation("com.google.firebase:firebase-analytics-ktx")
-
-    // Required dependencies
-    implementation("com.google.code.gson:gson:2.13.1")
-    implementation("androidx.lifecycle:lifecycle-process:2.8.7")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
-    implementation("androidx.security:security-crypto:1.1.0-alpha06")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
-
-    // Tracking SDKs
-    implementation("com.facebook.android:facebook-android-sdk:18.2.3")
-    implementation("com.github.tiktok:tiktok-business-android-sdk:1.6.1")
 }

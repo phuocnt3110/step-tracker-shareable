@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.steptracker.nativeapp.R
 import com.steptracker.nativeapp.data.ActivityRecord
 import com.steptracker.nativeapp.data.DataRepository
-import com.nphlab.sdk.ads.NphAds
-import android.widget.FrameLayout
 import kotlinx.coroutines.launch
 
 class ActivityListActivity : AppCompatActivity() {
@@ -33,35 +31,10 @@ class ActivityListActivity : AppCompatActivity() {
         setupRecyclerView()
         loadActivities()
 
-        // Load native ad
-        val nativeAdContainer = findViewById<FrameLayout>(R.id.nativeAdContainer)
-        nativeAdContainer?.let {
-            NphAds.loadNativeInto(it, AdNamespaces.NATIVE_ACTIVITY_LIST)
-        }
-        
-        // Register back press callback with interstitial ad and timeout fallback
+        // Register back press callback
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            private var isHandling = false
             override fun handleOnBackPressed() {
-                if (isHandling) return
-                isHandling = true
-                val handler = android.os.Handler(mainLooper)
-                val fallback = Runnable { if (!isFinishing) finish() }
-                handler.postDelayed(fallback, 3000)
-                NphAds.showInterstitial(
-                    activity = this@ActivityListActivity,
-                    nameSpace = AdNamespaces.INTER_MAIN,
-                    listener = object : com.nphlab.sdk.ads.listener.NphAdListener() {
-                        override fun onAdDismissed() {
-                            handler.removeCallbacks(fallback)
-                            finish()
-                        }
-                        override fun onAdFailed(error: com.nphlab.sdk.ads.AdError) {
-                            handler.removeCallbacks(fallback)
-                            finish()
-                        }
-                    }
-                )
+                finish()
             }
         })
     }
@@ -99,7 +72,6 @@ class ActivityListActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        NphAds.destroy(this)
         super.onDestroy()
     }
 }

@@ -21,9 +21,6 @@ import com.steptracker.nativeapp.R
 import com.steptracker.nativeapp.data.DataRepository
 import com.steptracker.nativeapp.sensor.ActivityTrackingService
 import com.steptracker.nativeapp.sensor.StepCounterManager
-import com.nphlab.sdk.ads.NphAds
-import com.nphlab.sdk.ads.listener.NphAdListener
-import com.nphlab.sdk.ads.AdError
 import androidx.activity.OnBackPressedCallback
 import com.steptracker.nativeapp.util.LanguageUtil
 import kotlinx.coroutines.launch
@@ -78,14 +75,6 @@ class MainActivity : AppCompatActivity() {
         // Schedule daily midnight reset
         com.steptracker.nativeapp.sensor.DailyResetReceiver.scheduleDailyReset(this)
         
-        // Preload ads for sub-screens
-        NphAds.preload(this, AdNamespaces.INTER_MAIN)
-        NphAds.preload(this, AdNamespaces.INTER_SETTINGS)
-        NphAds.preload(this, AdNamespaces.INTER_ACTIVITY_DETAIL)
-        NphAds.preload(this, AdNamespaces.INTER_ACHIEVEMENT_BACK)
-        NphAds.preload(this, AdNamespaces.NATIVE_ACTIVITY_LIST)
-        NphAds.preload(this, AdNamespaces.NATIVE_REPORT)
-        
         // Handle back button: go to home tab or minimize app
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -121,36 +110,15 @@ class MainActivity : AppCompatActivity() {
             currentTabId = item.itemId
             when (item.itemId) {
                 R.id.nav_steps -> {
-                    // Show interstitial when leaving Achievement tab
-                    if (previousTab == R.id.nav_achievement) {
-                        showInterstitialAndThen(AdNamespaces.INTER_ACHIEVEMENT_BACK) {
-                            showFragment(StepsFragment())
-                        }
-                    } else {
-                        showFragment(StepsFragment())
-                    }
+                    showFragment(StepsFragment())
                     true
                 }
                 R.id.nav_activity -> {
-                    if (previousTab == R.id.nav_achievement) {
-                        showInterstitialAndThen(AdNamespaces.INTER_ACHIEVEMENT_BACK) {
-                            showFragment(ActivityFragment())
-                        }
-                    } else {
-                        showInterstitialAndThen(AdNamespaces.INTER_MAIN) {
-                            showFragment(ActivityFragment())
-                        }
-                    }
+                    showFragment(ActivityFragment())
                     true
                 }
                 R.id.nav_report -> {
-                    if (previousTab == R.id.nav_achievement) {
-                        showInterstitialAndThen(AdNamespaces.INTER_ACHIEVEMENT_BACK) {
-                            showFragment(ReportFragment())
-                        }
-                    } else {
-                        showFragment(ReportFragment())
-                    }
+                    showFragment(ReportFragment())
                     true
                 }
                 R.id.nav_achievement -> {
@@ -173,32 +141,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun showInterstitialAndThen(nameSpace: String, onComplete: () -> Unit) {
-        // Prevent resume ad from firing right after interstitial dismisses
-        NphAds.pauseResumeAds()
-        var completed = false
-        val safeComplete = {
-            if (!completed) {
-                completed = true
-                // Re-enable resume ads after a brief delay (avoid immediate trigger)
-                bottomNav.postDelayed({ NphAds.resumeResumeAds() }, 2000)
-                onComplete()
-            }
-        }
-        NphAds.showInterstitial(
-            activity = this,
-            nameSpace = nameSpace,
-            listener = object : NphAdListener() {
-                override fun onAdDismissed() {
-                    safeComplete()
-                }
-                override fun onAdFailed(error: AdError) {
-                    safeComplete()
-                }
-            }
-        )
-    }
-    
     private fun checkPermissions(): Boolean {
         val permissions = mutableListOf<String>()
         
@@ -282,7 +224,6 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         stepCounterManager.stopTracking()
-        NphAds.destroy(this)
         if (serviceBound) {
             unbindService(serviceConnection)
         }

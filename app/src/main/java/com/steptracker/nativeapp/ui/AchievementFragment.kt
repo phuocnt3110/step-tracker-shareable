@@ -21,9 +21,6 @@ import com.google.android.material.chip.ChipGroup
 import com.steptracker.nativeapp.R
 import com.steptracker.nativeapp.data.Achievement
 import com.steptracker.nativeapp.data.DataRepository
-import com.nphlab.sdk.ads.NphAds
-import com.nphlab.sdk.ads.listener.NphRewardListener
-import com.nphlab.sdk.ads.AdError
 import kotlinx.coroutines.launch
 
 class AchievementFragment : Fragment() {
@@ -182,20 +179,7 @@ class AchievementAdapter(
 
     private fun showRewardedAd(achievement: Achievement) {
         fragment.activity?.let { activity ->
-            NphAds.showRewarded(
-                activity = activity,
-                nameSpace = AdNamespaces.REWARD_ACHIEVEMENT,
-                listener = object : NphRewardListener() {
-                    override fun onRewardEarned(rewardType: String, rewardAmount: Int) {
-                        // Reward earned - grant to user
-                        Toast.makeText(activity, "Reward earned!", Toast.LENGTH_SHORT).show()
-                    }
-                    override fun onAdDismissed() {
-                    }
-                    override fun onAdFailed(error: AdError) {
-                    }
-                }
-            )
+            Toast.makeText(activity, "Reward earned!", Toast.LENGTH_SHORT).show()
         }
     }
     

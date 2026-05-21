@@ -2,7 +2,6 @@
 agp = "8.7.2"
 kotlin = "2.0.21"
 ksp = "2.0.21-1.0.28"
-googleServices = "4.4.2"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -54,4 +53,3 @@ mpandroidchart = { group = "com.github.PhilJay", name = "MPAndroidChart", versio
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }
