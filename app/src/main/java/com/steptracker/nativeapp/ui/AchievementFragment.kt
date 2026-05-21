@@ -75,7 +75,10 @@ class AchievementFragment : Fragment() {
     }
     
     private fun setupRecyclerView() {
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        recyclerView.layoutManager = object : GridLayoutManager(requireContext(), 2) {
+            override fun canScrollVertically() = false
+        }
+        recyclerView.isNestedScrollingEnabled = false
     }
     
     private fun setupChips() {

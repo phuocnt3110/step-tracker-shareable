@@ -250,37 +250,16 @@
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
-        <!-- Action Buttons Row -->
-        <LinearLayout
+        <!-- Action Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnViewDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:orientation="horizontal">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnViewDetail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="6dp"
-                android:text="@string/view_activity_detail"
-                android:textAllCaps="false"
-                app:cornerRadius="12dp"
-                app:backgroundTint="@color/emerald_500" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnDoubleSteps"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="6dp"
-                android:text="2x Bonus"
-                android:textAllCaps="false"
-                app:icon="@drawable/ic_trending"
-                app:iconGravity="textStart"
-                app:cornerRadius="12dp"
-                app:backgroundTint="@color/orange_500" />
-        </LinearLayout>
+            android:text="@string/view_activity_detail"
+            android:textAllCaps="false"
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/emerald_500" />
 
         <!-- Recent Activity Summary -->
         <com.google.android.material.card.MaterialCardView

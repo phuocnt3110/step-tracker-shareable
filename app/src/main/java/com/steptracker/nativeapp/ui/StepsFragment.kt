@@ -88,19 +88,6 @@ class StepsFragment : Fragment() {
             startActivity(Intent(requireContext(), ActivityDetailActivity::class.java))
         }
 
-        view.findViewById<View>(R.id.btnDoubleSteps)?.setOnClickListener {
-            viewLifecycleOwner.lifecycleScope.launch {
-                val data = viewModel.todayData.first().firstOrNull()
-                val bonus = data?.currentSteps ?: 0
-                if (bonus > 0) {
-                    viewModel.addBonusSteps(bonus)
-                    android.widget.Toast.makeText(requireContext(),
-                        "2x Bonus! +$bonus steps",
-                        android.widget.Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
         btnActivitySettings.setOnClickListener {
             showActivityOptionsDialog()
         }

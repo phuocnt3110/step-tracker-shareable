@@ -127,4 +127,7 @@
     <string name="total_distance_label">Total Distance</string>
     <string name="total_calories_label">Total Calories</string>
     <string name="daily_average_label">Daily Average</string>
+    
+    <!-- GPS -->
+    <string name="gps_required">Please enable GPS to track your activity route</string>
 </resources>

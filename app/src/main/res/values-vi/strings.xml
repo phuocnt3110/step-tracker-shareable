@@ -123,4 +123,7 @@
     <string name="total_distance_label">Tổng khoảng cách</string>
     <string name="total_calories_label">Tổng calo</string>
     <string name="daily_average_label">Trung bình hàng ngày</string>
+    
+    <!-- GPS -->
+    <string name="gps_required">Vui lòng bật GPS để theo dõi lộ trình hoạt động</string>
 </resources>

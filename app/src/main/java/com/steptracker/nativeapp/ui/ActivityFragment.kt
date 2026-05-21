@@ -121,6 +121,15 @@ class ActivityFragment : Fragment() {
             updateButtonState()
             clearStats()
         } else {
+            // Check GPS enabled
+            val locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as android.location.LocationManager
+            if (!locationManager.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER)) {
+                Toast.makeText(requireContext(), getString(R.string.gps_required), Toast.LENGTH_LONG).show()
+                // Prompt user to enable GPS
+                startActivity(android.content.Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+                return
+            }
+            
             if (service.startTracking()) {
                 updateButtonState()
             } else {

@@ -3,6 +3,7 @@ package com.steptracker.nativeapp.data
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
@@ -163,6 +164,11 @@ class DataRepository(context: Context) {
     }
 
     suspend fun initializeAchievements() = withContext(Dispatchers.IO) {
+        // Only insert if table is empty to preserve progress
+        val existing = achievementDao.getUnlockedCount()
+        val allCount = achievementDao.getAll().first().size
+        if (allCount > 0) return@withContext
+        
         val achievements = listOf(
             // Daily Steps - Beginner
             Achievement("first_steps", "First Steps", "Walk 1,000 steps in a day", "dailySteps", 1000, icon = "footprints", color = "#10b981"),

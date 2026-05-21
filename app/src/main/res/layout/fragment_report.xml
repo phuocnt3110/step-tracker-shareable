@@ -42,6 +42,8 @@
                     android:layout_weight="1"
                     android:text="@string/day"
                     android:textAllCaps="false"
+                    android:maxLines="1"
+                    android:textSize="12sp"
                     app:cornerRadius="8dp"
                     style="@style/Widget.Material3.Button.TonalButton" />
 
@@ -52,6 +54,8 @@
                     android:layout_weight="1"
                     android:text="@string/week"
                     android:textAllCaps="false"
+                    android:maxLines="1"
+                    android:textSize="12sp"
                     app:cornerRadius="8dp"
                     style="@style/Widget.Material3.Button" />
 
@@ -62,6 +66,8 @@
                     android:layout_weight="1"
                     android:text="@string/month"
                     android:textAllCaps="false"
+                    android:maxLines="1"
+                    android:textSize="12sp"
                     app:cornerRadius="8dp"
                     style="@style/Widget.Material3.Button.TonalButton" />
 
@@ -72,6 +78,8 @@
                     android:layout_weight="1"
                     android:text="@string/year"
                     android:textAllCaps="false"
+                    android:maxLines="1"
+                    android:textSize="12sp"
                     app:cornerRadius="8dp"
                     style="@style/Widget.Material3.Button.TonalButton" />
             </LinearLayout>
